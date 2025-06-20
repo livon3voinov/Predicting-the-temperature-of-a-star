@@ -1,0 +1,49 @@
+TypeError                                 Traceback (most recent call last)
+/tmp/ipykernel_236/2724404961.py in <module>
+      6 
+      7 #train_model(model, criterion, optimizer, X_train, y_train, )
+----> 8 train_model(model, criterion, optimizer, X_train_ridge, y_train,  X_test_ridge, y_test, epochs=100000, patience=400)
+
+/tmp/ipykernel_236/3497349032.py in train_model(model, criterion, optimizer, X_trai0n, y_train, X_val, y_val, epochs, patience)
+     50         labels = y_train.values
+     51         optimizer.zero_grad()
+---> 52         outputs = model(inputs)
+     53         loss = criterion(outputs, labels)
+     54         loss.backward()
+
+/opt/conda/lib/python3.9/site-packages/torch/nn/modules/module.py in _call_impl(self, *input, **kwargs)
+   1100         if not (self._backward_hooks or self._forward_hooks or self._forward_pre_hooks or _global_backward_hooks
+   1101                 or _global_forward_hooks or _global_forward_pre_hooks):
+-> 1102             return forward_call(*input, **kwargs)
+   1103         # Do not call functions when jit is used
+   1104         full_backward_hooks, non_full_backward_hooks = [], []
+
+/tmp/ipykernel_236/3497349032.py in forward(self, x)
+     16 
+     17     def forward(self, x):
+---> 18         x = self.fc1(x)
+     19         x = self.act1(x)
+     20 
+
+/opt/conda/lib/python3.9/site-packages/torch/nn/modules/module.py in _call_impl(self, *input, **kwargs)
+   1100         if not (self._backward_hooks or self._forward_hooks or self._forward_pre_hooks or _global_backward_hooks
+   1101                 or _global_forward_hooks or _global_forward_pre_hooks):
+-> 1102             return forward_call(*input, **kwargs)
+   1103         # Do not call functions when jit is used
+   1104         full_backward_hooks, non_full_backward_hooks = [], []
+
+/opt/conda/lib/python3.9/site-packages/torch/nn/modules/linear.py in forward(self, input)
+    101 
+    102     def forward(self, input: Tensor) -> Tensor:
+--> 103         return F.linear(input, self.weight, self.bias)
+    104 
+    105     def extra_repr(self) -> str:
+
+/opt/conda/lib/python3.9/site-packages/torch/nn/functional.py in linear(input, weight, bias)
+   1846     if has_torch_function_variadic(input, weight, bias):
+   1847         return handle_torch_function(linear, (input, weight, bias), input, weight, bias=bias)
+-> 1848     return torch._C._nn.linear(input, weight, bias)
+   1849 
+   1850 
+
+TypeError: linear(): argument 'input' (position 1) must be Tensor, not numpy.ndarray
